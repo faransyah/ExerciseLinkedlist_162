@@ -69,11 +69,18 @@ bool CircularLinkedList::listEmpty() {
 bool CircularLinkedList::delNode() { //between two nodes in the list
 	Node* current = current->next;
 	Node* previous = NULL;
-	if (search())
-	{
-
-	}
+	if (search(rollNumber, &previous, &current) == false)
+		return false;
+	if (current->next != NULL)
+		current->next = previous;
+	if (previous != NULL)
+		previous->next = current->next;
+	else
+		START = current->next;
+	delete current;
+	return true;
 }
+
 void CircularLinkedList::traverse() {
 	if (listEmpty()) {
 		cout << "\nList is empty\n";
